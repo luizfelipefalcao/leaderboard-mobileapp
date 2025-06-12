@@ -10,7 +10,7 @@ function SearchUserRow({ searchTerm, setSearchTerm }: SearchUserRowProps): React
   return (
     <View style={styles.row}>
       <View style={styles.inputContainer}>
-        <TextInput style={styles.input} placeholder="Search names..." placeholderTextColor={theme.colors.lightGray} value={searchTerm} onChangeText={setSearchTerm} />
+        <TextInput style={styles.input} placeholder="Search names..." placeholderTextColor={theme.colors.mediumGray} value={searchTerm} onChangeText={setSearchTerm} />
         {searchTerm ? (
           <TouchableOpacity style={styles.clearButton} onPress={() => setSearchTerm("")} accessibilityLabel="Clear search">
             <Text style={styles.clearIcon}>X</Text>

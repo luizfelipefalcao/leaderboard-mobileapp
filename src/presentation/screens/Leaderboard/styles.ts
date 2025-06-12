@@ -41,8 +41,8 @@ export const styles = StyleSheet.create({
   addUserButtonRow: {
     position: "absolute",
     left: 0,
-    right: 0,
-    bottom: 0,
+    right: moderateScale(24),
+    bottom: moderateScale(24),
     backgroundColor: "transparent",
     alignItems: "flex-end",
     zIndex: 10,

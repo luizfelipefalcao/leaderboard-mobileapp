@@ -5,11 +5,9 @@ import { moderateScale } from "../../utils";
 export const styles = StyleSheet.create({
   form: {
     marginTop: moderateScale(16),
-    backgroundColor: theme.colors.lightGray,
     borderRadius: moderateScale(8),
     padding: moderateScale(16),
     width: "100%",
-    maxWidth: 400,
     alignSelf: "center",
   },
   title: {
@@ -45,10 +43,14 @@ export const styles = StyleSheet.create({
   },
   submitButton: {
     borderWidth: moderateScale(1),
+    borderRadius: moderateScale(32),
+    paddingVertical: moderateScale(12),
+    paddingHorizontal: moderateScale(32),
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: moderateScale(46),
+    minHeight: moderateScale(46),
     borderColor: theme.colors.darkGreen,
-    borderRadius: moderateScale(6),
-    paddingVertical: moderateScale(8),
-    paddingHorizontal: moderateScale(16),
     backgroundColor: theme.colors.lightGreen,
   },
   submitButtonText: {

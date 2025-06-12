@@ -4,38 +4,39 @@ import { moderateScale } from "../../utils";
 
 export const styles = StyleSheet.create({
   container: {
-    margin: theme.spaces.margin,
-    padding: moderateScale(8),
-    paddingHorizontal: moderateScale(16),
-    backgroundColor: theme.colors.background,
-    borderRadius: moderateScale(8),
+    alignItems: "center",
+    justifyContent: "center",
   },
   innerContainer: {
     flexDirection: "row",
-    justifyContent: "flex-end",
+    justifyContent: "center",
+    alignItems: "center",
   },
   button: {
     borderWidth: moderateScale(1),
+    borderRadius: moderateScale(32),
+    paddingVertical: moderateScale(12),
+    paddingHorizontal: moderateScale(20),
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: moderateScale(46),
+    minHeight: moderateScale(46),
     borderColor: theme.colors.darkBlue,
-    borderRadius: moderateScale(6),
-    paddingVertical: moderateScale(8),
-    paddingHorizontal: moderateScale(16),
-  },
-  buttonText: {
-    fontSize: moderateScale(16),
-    fontWeight: "500",
-  },
-  addButton: {
-    backgroundColor: theme.colors.background,
+    backgroundColor: theme.colors.lightBlue,
   },
   addText: {
     color: theme.colors.darkBlue,
+    fontWeight: "bold",
+    fontSize: moderateScale(16),
   },
   cancelButton: {
     backgroundColor: theme.colors.lightRed,
     borderColor: theme.colors.darkRed,
+    borderWidth: 1,
   },
   cancelText: {
     color: theme.colors.darkRed,
+    fontWeight: "bold",
+    fontSize: moderateScale(18),
   },
 });

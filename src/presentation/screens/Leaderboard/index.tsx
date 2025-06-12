@@ -12,6 +12,7 @@ import AddUserButton from "../../components/AddUserButton";
 import Loading from "../../components/Loading";
 
 import { styles } from "./styles";
+import Modal from "../../components/Modal";
 
 export type User = { _id?: string; name: string; age: number; points: number; address: string };
 
@@ -56,7 +57,7 @@ function LeaderboadScreen() {
 
   const handleCleanAndShowAddForm = useCallback(() => {
     setNewUser({ name: "", age: 0, points: 0, address: "" });
-    setShowAddForm((prev) => !prev);
+    setShowAddForm(true);
   }, []);
 
   const handleSubmitForm = useCallback(() => {
@@ -153,15 +154,18 @@ function LeaderboadScreen() {
           ) : (
             <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
               {renderUserList}
-              {renderNewUserForm}
             </ScrollView>
           )}
         </View>
 
         <View style={styles.addUserButtonRow}>
-          <AddUserButton setShowAddForm={handleCleanAndShowAddForm} showAddForm={showAddForm} />
+          <AddUserButton setShowAddForm={handleCleanAndShowAddForm} />
         </View>
       </View>
+
+      <Modal visible={showAddForm} onRequestClose={() => setShowAddForm(false)}>
+        <View style={{ width: "100%" }}>{renderNewUserForm}</View>
+      </Modal>
     </SafeAreaView>
   );
 }

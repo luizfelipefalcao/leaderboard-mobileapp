@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 
 import { theme } from "../../theme";
@@ -12,6 +12,10 @@ type NewUserFormProps = {
 };
 
 const NewUserForm = ({ newUser, onSubmitForm, setNewUser }: NewUserFormProps) => {
+  const isDisabled = useMemo(() => {
+    return newUser.name === "" || newUser.age === "" || newUser.address === "" || Number(newUser.points) < 0 || newUser.age === "";
+  }, [newUser]);
+
   return (
     <View style={styles.form}>
       <Text style={styles.title}>Create a New User:</Text>
@@ -23,7 +27,7 @@ const NewUserForm = ({ newUser, onSubmitForm, setNewUser }: NewUserFormProps) =>
           value={String(newUser?.name)}
           onChangeText={(value) => setNewUser({ ...newUser, name: value })}
           placeholder="Name"
-          placeholderTextColor={theme.colors.lightGray}
+          placeholderTextColor={theme.colors.mediumGray}
         />
       </View>
 
@@ -34,8 +38,9 @@ const NewUserForm = ({ newUser, onSubmitForm, setNewUser }: NewUserFormProps) =>
           value={String(newUser.age)}
           onChangeText={(value) => setNewUser({ ...newUser, age: value })}
           placeholder="Age"
-          placeholderTextColor={theme.colors.lightGray}
+          placeholderTextColor={theme.colors.mediumGray}
           keyboardType="numeric"
+          onFocus={() => setNewUser({ ...newUser, age: "" })}
         />
       </View>
 
@@ -46,8 +51,9 @@ const NewUserForm = ({ newUser, onSubmitForm, setNewUser }: NewUserFormProps) =>
           value={String(newUser.points)}
           onChangeText={(value) => setNewUser({ ...newUser, points: value })}
           placeholder="Points"
-          placeholderTextColor={theme.colors.lightGray}
+          placeholderTextColor={theme.colors.mediumGray}
           keyboardType="numeric"
+          onFocus={() => setNewUser({ ...newUser, points: "" })}
         />
       </View>
 
@@ -58,13 +64,19 @@ const NewUserForm = ({ newUser, onSubmitForm, setNewUser }: NewUserFormProps) =>
           value={String(newUser?.address)}
           onChangeText={(value) => setNewUser({ ...newUser, address: value })}
           placeholder="Address"
-          placeholderTextColor={theme.colors.lightGray}
+          placeholderTextColor={theme.colors.mediumGray}
+          onFocus={() => setNewUser({ ...newUser, address: "" })}
         />
       </View>
 
       <View style={styles.buttonRow}>
-        <TouchableOpacity style={styles.submitButton} onPress={onSubmitForm} accessibilityLabel="Submit">
-          <Text style={styles.submitButtonText}>Submit</Text>
+        <TouchableOpacity
+          style={[styles.submitButton, isDisabled && { backgroundColor: theme.colors.background, borderColor: theme.colors.lightGray }]}
+          onPress={onSubmitForm}
+          accessibilityLabel="Submit"
+          disabled={isDisabled}
+        >
+          <Text style={[styles.submitButtonText, isDisabled && { color: theme.colors.mediumGray }]}>Submit</Text>
         </TouchableOpacity>
       </View>
     </View>
