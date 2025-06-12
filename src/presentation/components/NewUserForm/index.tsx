@@ -1,0 +1,74 @@
+import React from "react";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
+
+import { theme } from "../../theme";
+import { styles } from "./styles";
+
+type User = { name: string; age: string | number; points: string | number; address: string };
+type NewUserFormProps = {
+  newUser: User;
+  setNewUser: (value: any) => void;
+  onSubmitForm: () => void;
+};
+
+const NewUserForm = ({ newUser, onSubmitForm, setNewUser }: NewUserFormProps) => {
+  return (
+    <View style={styles.form}>
+      <Text style={styles.title}>Create a New User:</Text>
+
+      <View style={styles.inputGroup}>
+        <Text style={styles.label}>Name</Text>
+        <TextInput
+          style={styles.input}
+          value={String(newUser?.name)}
+          onChangeText={(value) => setNewUser({ ...newUser, name: value })}
+          placeholder="Name"
+          placeholderTextColor={theme.colors.lightGray}
+        />
+      </View>
+
+      <View style={styles.inputGroup}>
+        <Text style={styles.label}>Age</Text>
+        <TextInput
+          style={styles.input}
+          value={String(newUser.age)}
+          onChangeText={(value) => setNewUser({ ...newUser, age: value })}
+          placeholder="Age"
+          placeholderTextColor={theme.colors.lightGray}
+          keyboardType="numeric"
+        />
+      </View>
+
+      <View style={styles.inputGroup}>
+        <Text style={styles.label}>Points</Text>
+        <TextInput
+          style={styles.input}
+          value={String(newUser.points)}
+          onChangeText={(value) => setNewUser({ ...newUser, points: value })}
+          placeholder="Points"
+          placeholderTextColor={theme.colors.lightGray}
+          keyboardType="numeric"
+        />
+      </View>
+
+      <View style={styles.inputGroup}>
+        <Text style={styles.label}>Address</Text>
+        <TextInput
+          style={styles.input}
+          value={String(newUser?.address)}
+          onChangeText={(value) => setNewUser({ ...newUser, address: value })}
+          placeholder="Address"
+          placeholderTextColor={theme.colors.lightGray}
+        />
+      </View>
+
+      <View style={styles.buttonRow}>
+        <TouchableOpacity style={styles.submitButton} onPress={onSubmitForm} accessibilityLabel="Submit">
+          <Text style={styles.submitButtonText}>Submit</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
+export default NewUserForm;
