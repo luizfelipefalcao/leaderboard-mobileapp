@@ -1,15 +1,15 @@
 import React, { useCallback, useState, useEffect, useMemo } from "react";
-import { View, ScrollView, Image } from "react-native";
+import { View, ScrollView, Image, SafeAreaView } from "react-native";
 
 import { UserService } from "../../../services/User";
+import { theme } from "../../theme";
+
 import NewUserForm from "../../components/NewUserForm";
 import SortItemsRow from "../../components/SortItemsRow";
 import SearchUserRow from "../../components/SearchUserRow";
 import UserList from "../../components/UserList";
-import SpaceLine from "../../components/SpaceLine";
 import AddUserButton from "../../components/AddUserButton";
 import Loading from "../../components/Loading";
-import springLogo from "../../assets/spring-logo.svg";
 
 import { styles } from "./styles";
 
@@ -136,17 +136,20 @@ function LeaderboadScreen() {
   }, [handleSubmitForm, newUser, showAddForm]);
 
   return (
-    <View style={styles.screen}>
-      <View style={styles.container}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.background }}>
+      <View style={styles.screen}>
         <View style={styles.logoRow}>
-          <Image source={springLogo} style={styles.logo} resizeMode="contain" />
+          <Image source={require("../../assets/spring-logo.png")} style={styles.logo} resizeMode="contain" />
         </View>
+
         <SortItemsRow sortByName={handleSortByName} sortByPoints={handleSortByPoints} />
         <SearchUserRow searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <SpaceLine />
+
         <View style={styles.listWrapper}>
           {isLoading ? (
-            <Loading />
+            <View style={styles.loadingContainer}>
+              <Loading />
+            </View>
           ) : (
             <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
               {renderUserList}
@@ -154,10 +157,12 @@ function LeaderboadScreen() {
             </ScrollView>
           )}
         </View>
-        <SpaceLine />
-        <AddUserButton setShowAddForm={handleCleanAndShowAddForm} showAddForm={showAddForm} />
+
+        <View style={styles.addUserButtonRow}>
+          <AddUserButton setShowAddForm={handleCleanAndShowAddForm} showAddForm={showAddForm} />
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

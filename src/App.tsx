@@ -1,10 +1,10 @@
 import React from "react";
-import { View, Text } from "react-native";
-import { theme } from "./presentation/theme";
+import { View } from "react-native";
+import LeaderboadScreen from "./presentation/screens/Leaderboard";
 
 const App = () => (
-  <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: theme.colors.background }}>
-    <Text>Welcome to the Leaderboard App!</Text>
+  <View style={{ flex: 1 }}>
+    <LeaderboadScreen />
   </View>
 );
 
