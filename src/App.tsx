@@ -1,11 +1,12 @@
 import React from "react";
-import { View } from "react-native";
+import { SafeAreaView } from "react-native";
 import LeaderboadScreen from "./presentation/screens/Leaderboard";
+import { theme } from "./presentation/theme";
 
 const App = () => (
-  <View style={{ flex: 1 }}>
+  <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.background }}>
     <LeaderboadScreen />
-  </View>
+  </SafeAreaView>
 );
 
 export default App;

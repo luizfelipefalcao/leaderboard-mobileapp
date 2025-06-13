@@ -10,16 +10,4 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  iconClose: {
-    paddingRight: moderateScale(16),
-    marginTop: -moderateScale(164),
-    marginBottom: -moderateScale(12),
-    width: "100%",
-    alignItems: "flex-end",
-  },
-  iconCloseText: {
-    color: theme.colors.darkGray,
-    fontSize: moderateScale(26),
-    fontWeight: "bold",
-  },
 });

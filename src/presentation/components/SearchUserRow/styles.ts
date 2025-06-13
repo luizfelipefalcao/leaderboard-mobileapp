@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     fontSize: moderateScale(14),
     color: theme.colors.darkGray,
-    paddingVertical: 0,
+    paddingVertical: moderateScale(2),
   },
   clearButton: {
     position: "absolute",
@@ -45,5 +45,6 @@ export const styles = StyleSheet.create({
   clearIcon: {
     fontSize: moderateScale(16),
     color: theme.colors.darkGray,
+    fontWeight: "600",
   },
 });

@@ -1,8 +1,7 @@
 import React, { useCallback, useState, useEffect, useMemo } from "react";
-import { View, ScrollView, Image, SafeAreaView } from "react-native";
+import { View, ScrollView, Image } from "react-native";
 
 import { UserService } from "../../../services/User";
-import { theme } from "../../theme";
 
 import NewUserForm from "../../components/NewUserForm";
 import SortItemsRow from "../../components/SortItemsRow";
@@ -13,6 +12,7 @@ import Loading from "../../components/Loading";
 
 import { styles } from "./styles";
 import Modal from "../../components/Modal";
+import { moderateScale } from "../../utils";
 
 export type User = { _id?: string; name: string; age: number; points: number; address: string };
 
@@ -58,6 +58,11 @@ function LeaderboadScreen() {
   const handleCleanAndShowAddForm = useCallback(() => {
     setNewUser({ name: "", age: 0, points: 0, address: "" });
     setShowAddForm(true);
+  }, []);
+
+  const handleCleanAndCloseAddForm = useCallback(() => {
+    setNewUser({ name: "", age: 0, points: 0, address: "" });
+    setShowAddForm(false);
   }, []);
 
   const handleSubmitForm = useCallback(() => {
@@ -133,40 +138,38 @@ function LeaderboadScreen() {
 
   const renderNewUserForm = useMemo(() => {
     if (!showAddForm || !newUser) return null;
-    return <NewUserForm newUser={newUser} onSubmitForm={handleSubmitForm} setNewUser={setNewUser} />;
+    return <NewUserForm newUser={newUser} onSubmitForm={handleSubmitForm} setNewUser={setNewUser} onCancelForm={handleCleanAndCloseAddForm} />;
   }, [handleSubmitForm, newUser, showAddForm]);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.background }}>
-      <View style={styles.screen}>
-        <View style={styles.logoRow}>
-          <Image source={require("../../assets/spring-logo.png")} style={styles.logo} resizeMode="contain" />
-        </View>
+    <View style={styles.screen}>
+      <View style={styles.logoRow}>
+        <Image source={require("../../assets/spring-logo.png")} style={styles.logo} resizeMode="contain" />
+      </View>
 
-        <SortItemsRow sortByName={handleSortByName} sortByPoints={handleSortByPoints} />
-        <SearchUserRow searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <SortItemsRow sortByName={handleSortByName} sortByPoints={handleSortByPoints} />
+      <SearchUserRow searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
-        <View style={styles.listWrapper}>
-          {isLoading ? (
-            <View style={styles.loadingContainer}>
-              <Loading />
-            </View>
-          ) : (
-            <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-              {renderUserList}
-            </ScrollView>
-          )}
-        </View>
+      <View style={styles.listWrapper}>
+        {isLoading ? (
+          <View style={styles.loadingContainer}>
+            <Loading />
+          </View>
+        ) : (
+          <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+            {renderUserList}
+          </ScrollView>
+        )}
+      </View>
 
-        <View style={styles.addUserButtonRow}>
-          <AddUserButton setShowAddForm={handleCleanAndShowAddForm} />
-        </View>
+      <View style={styles.addUserButtonRow}>
+        <AddUserButton setShowAddForm={handleCleanAndShowAddForm} />
       </View>
 
       <Modal visible={showAddForm} onRequestClose={() => setShowAddForm(false)}>
-        <View style={{ width: "100%" }}>{renderNewUserForm}</View>
+        <View style={{ marginTop: -moderateScale(140) }}>{renderNewUserForm}</View>
       </Modal>
-    </SafeAreaView>
+    </View>
   );
 }
 

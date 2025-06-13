@@ -19,12 +19,14 @@ export const styles = StyleSheet.create({
   },
   logoRow: {
     width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
     marginVertical: moderateScale(12),
   },
   logo: {
-    height: moderateScale(40),
-    width: moderateScale(70),
-    marginBottom: moderateScale(4),
+    height: moderateScale(50),
+    width: moderateScale(90),
+    marginBottom: moderateScale(12),
   },
   listWrapper: {
     flex: 1,

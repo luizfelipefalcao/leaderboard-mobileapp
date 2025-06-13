@@ -9,9 +9,10 @@ type NewUserFormProps = {
   newUser: User;
   setNewUser: (value: any) => void;
   onSubmitForm: () => void;
+  onCancelForm: () => void;
 };
 
-const NewUserForm = ({ newUser, onSubmitForm, setNewUser }: NewUserFormProps) => {
+const NewUserForm = ({ newUser, onSubmitForm, onCancelForm, setNewUser }: NewUserFormProps) => {
   const isDisabled = useMemo(() => {
     return newUser.name === "" || newUser.age === "" || newUser.address === "" || Number(newUser.points) < 0 || newUser.age === "";
   }, [newUser]);
@@ -27,6 +28,9 @@ const NewUserForm = ({ newUser, onSubmitForm, setNewUser }: NewUserFormProps) =>
           value={String(newUser?.name)}
           onChangeText={(value) => setNewUser({ ...newUser, name: value })}
           placeholder="Name"
+          autoCorrect={false}
+          autoComplete="off"
+          spellCheck={false}
           placeholderTextColor={theme.colors.mediumGray}
         />
       </View>
@@ -64,12 +68,19 @@ const NewUserForm = ({ newUser, onSubmitForm, setNewUser }: NewUserFormProps) =>
           value={String(newUser?.address)}
           onChangeText={(value) => setNewUser({ ...newUser, address: value })}
           placeholder="Address"
+          autoCorrect={false}
+          autoComplete="off"
+          spellCheck={false}
           placeholderTextColor={theme.colors.mediumGray}
           onFocus={() => setNewUser({ ...newUser, address: "" })}
         />
       </View>
 
       <View style={styles.buttonRow}>
+        <TouchableOpacity style={styles.cancelButton} onPress={onCancelForm} accessibilityLabel="Cancel">
+          <Text style={styles.cancelButtonText}>Cancel</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity
           style={[styles.submitButton, isDisabled && { backgroundColor: theme.colors.background, borderColor: theme.colors.lightGray }]}
           onPress={onSubmitForm}
